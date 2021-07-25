@@ -10,4 +10,12 @@ export const Configuration = () => ({
     password: process.env.DATABASE_PASSWORD,
     name: process.env.DATABASE_NAME,
   },
+  session: {
+    key: process.env.SESSION_COOKIE_KEY || 'sid',
+    secret: process.env.SESSION_SECRET,
+    redis: {
+      host: process.env.REDIS_HOST || 'localhost',
+      port: process.env.REDIS_PORT || 6379,
+    },
+  },
 });

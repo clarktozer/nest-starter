@@ -11,4 +11,8 @@ export const ConfigValidationSchema = Joi.object({
   DATABASE_USER: Joi.string().required(),
   DATABASE_PASSWORD: Joi.string().required(),
   DATABASE_PORT: Joi.number().default(5432),
+  SESSION_COOKIE_ID: Joi.string().default('sid'),
+  SESSION_SECRET: Joi.string().required(),
+  REDIS_HOST: Joi.string().default('localhost'),
+  REDIS_PORT: Joi.number().default(6379),
 });
