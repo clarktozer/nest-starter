@@ -5,41 +5,61 @@ import {
   Get,
   Post,
   Req,
+  Res,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { CreateUserDto } from 'src/user/dto/CreateUserDto';
-import { AuthCookieGuard } from './auth.guard';
+import { ConfigService } from '@nestjs/config';
+import { Response } from 'express';
+import { RegisterUserDto } from 'src/user/dto/registerUserDto';
+import { AuthenticatedGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 import { RequestWithUser } from './request.interface';
-import { LocalAuthGuard } from './strategies/local/local.guard';
+import { SessionGuard } from './session.guard';
 
 @Controller('auth')
 @UseInterceptors(ClassSerializerInterceptor)
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly configService: ConfigService,
+    private readonly authService: AuthService,
+  ) {}
 
   @Post('register')
-  register(@Body() data: CreateUserDto) {
+  register(@Body() data: RegisterUserDto) {
     return this.authService.register(data);
   }
 
-  @UseGuards(LocalAuthGuard)
+  @UseGuards(AuthenticatedGuard)
   @Post('login')
   async login(@Req() request: RequestWithUser) {
     return request.user;
   }
 
   @Get()
-  @UseGuards(AuthCookieGuard)
+  @UseGuards(SessionGuard)
   async me(@Req() request: RequestWithUser) {
     return request.user;
   }
 
   @Post('logout')
-  @UseGuards(AuthCookieGuard)
-  async logout(@Req() request: RequestWithUser) {
-    request.logOut();
-    request.session.cookie.maxAge = 0;
+  @UseGuards(SessionGuard)
+  logout(@Req() request: RequestWithUser, @Res() response: Response) {
+    request.logout();
+    request.session.destroy(() => {
+      response
+        .clearCookie(this.configService.get('session.key'))
+        .sendStatus(200);
+    });
+  }
+
+  @Get('google')
+  @UseGuards(AuthenticatedGuard)
+  async googleAuth() {}
+
+  @Get('google/redirect')
+  @UseGuards(AuthenticatedGuard)
+  googleAuthRedirect(@Req() request: RequestWithUser) {
+    return this.authService.signInWithGoogle(request.user);
   }
 }

@@ -5,13 +5,30 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ unique: true })
+  @Column({
+    unique: true,
+  })
   email: string;
 
   @Column()
   name: string;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
+  avatar: string;
+
+  @Column({
+    nullable: true,
+  })
   @Exclude()
   password: string;
+
+  @Column({
+    nullable: true,
+    unique: true,
+    name: 'google_id',
+  })
+  @Exclude()
+  googleId: string;
 }
