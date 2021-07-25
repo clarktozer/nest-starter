@@ -2,15 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, VerifyCallback } from 'passport-google-oauth20';
+import { CreateUserDto } from 'src/user/dto/createUserDto';
 import { UserService } from 'src/user/user.service';
-import { CreateUserDto } from '../../../user/dto/createUserDto';
-import { AuthService } from '../../auth.service';
 
 @Injectable()
-export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
+export class GoogleAuthStrategy extends PassportStrategy(Strategy, 'google') {
   constructor(
     private configService: ConfigService,
-    private authService: AuthService,
     private userService: UserService,
   ) {
     super({

@@ -31,4 +31,12 @@ export class User {
   })
   @Exclude()
   googleId: string;
+
+  @Column({
+    nullable: true,
+    unique: true,
+    name: 'facebook_id',
+  })
+  @Exclude()
+  facebookId: string;
 }

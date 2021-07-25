@@ -18,4 +18,7 @@ export const ConfigValidationSchema = Joi.object({
   GOOGLE_CLIENT_ID: Joi.string().required(),
   GOOGLE_CLIENT_SECRET: Joi.string().required(),
   GOOGLE_CALLBACK_URL: Joi.string().required(),
+  FACEBOOK_CLIENT_ID: Joi.string().required(),
+  FACEBOOK_CLIENT_SECRET: Joi.string().required(),
+  FACEBOOK_CALLBACK_URL: Joi.string().required(),
 });

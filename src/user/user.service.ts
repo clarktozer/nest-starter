@@ -40,6 +40,12 @@ export class UserService {
     return user;
   }
 
+  async getByFacebookId(id: string) {
+    const user = await this.usersRepository.findOne({ facebookId: id });
+
+    return user;
+  }
+
   async create(userData: CreateUserDto) {
     const newUser = this.usersRepository.create(userData);
     await this.usersRepository.save(newUser);

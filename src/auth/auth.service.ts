@@ -72,4 +72,24 @@ export class AuthService {
 
     return this.usersService.create(data);
   }
+
+  public async signInWithFacebook(data: CreateUserDto) {
+    if (!data) {
+      throw new BadRequestException();
+    }
+
+    let user = await this.usersService.getByFacebookId(data.facebookId);
+    if (user) {
+      return user;
+    }
+
+    user = await this.usersService.getByEmail(data.email);
+    if (user) {
+      throw new ForbiddenException(
+        'User already exists but Facebook account was not connected to user account',
+      );
+    }
+
+    return this.usersService.create(data);
+  }
 }

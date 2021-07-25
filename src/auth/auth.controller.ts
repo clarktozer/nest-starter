@@ -11,9 +11,9 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Response } from 'express';
-import { RegisterUserDto } from 'src/user/dto/registerUserDto';
-import { AuthenticatedGuard } from './auth.guard';
+import { RegisterUserDto } from '../user/dto/registerUserDto';
 import { AuthService } from './auth.service';
+import { LocalAuthGuard } from './local/local.guard';
 import { RequestWithUser } from './request.interface';
 import { SessionGuard } from './session.guard';
 
@@ -30,7 +30,7 @@ export class AuthController {
     return this.authService.register(data);
   }
 
-  @UseGuards(AuthenticatedGuard)
+  @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(@Req() request: RequestWithUser) {
     return request.user;
@@ -51,15 +51,5 @@ export class AuthController {
         .clearCookie(this.configService.get('session.key'))
         .sendStatus(200);
     });
-  }
-
-  @Get('google')
-  @UseGuards(AuthenticatedGuard)
-  async googleAuth() {}
-
-  @Get('google/redirect')
-  @UseGuards(AuthenticatedGuard)
-  googleAuthRedirect(@Req() request: RequestWithUser) {
-    return this.authService.signInWithGoogle(request.user);
   }
 }

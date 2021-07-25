@@ -9,5 +9,7 @@ export class CreateUserDto {
 
   avatar: string;
 
-  googleId: string;
+  googleId?: string;
+
+  facebookId?: string;
 }
