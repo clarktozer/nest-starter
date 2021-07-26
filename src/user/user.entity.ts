@@ -39,4 +39,10 @@ export class User {
   })
   @Exclude()
   facebookId: string;
+
+  @Column({
+    default: false,
+    name: 'is_admin',
+  })
+  isAdmin: boolean;
 }

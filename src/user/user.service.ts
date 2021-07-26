@@ -17,7 +17,7 @@ export class UserService {
   }
 
   async getById(id: string) {
-    return this.usersRepository.findOne({ id });
+    return this.usersRepository.findOne(id);
   }
 
   async register(userData: RegisterUserDto) {
@@ -44,5 +44,9 @@ export class UserService {
     await this.usersRepository.save(newUser);
 
     return newUser;
+  }
+
+  async findAll() {
+    return this.usersRepository.find();
   }
 }

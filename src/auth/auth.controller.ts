@@ -11,9 +11,9 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Response } from 'express';
+import { AntiForgeryGuard } from '../csrf/csrf.guard';
 import { RegisterUserDto } from '../user/dto/registerUserDto';
 import { AuthService } from './auth.service';
-import { AntiForgeryGuard } from './csrf.guard';
 import { LocalAuthGuard } from './local/local.guard';
 import { RequestWithUser } from './request.interface';
 import { SessionGuard } from './session.guard';

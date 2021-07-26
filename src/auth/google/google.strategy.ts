@@ -2,8 +2,8 @@ import { ForbiddenException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, VerifyCallback } from 'passport-google-oauth20';
-import { CreateUserDto } from 'src/user/dto/createUserDto';
-import { UserService } from 'src/user/user.service';
+import { CreateUserDto } from '../../user/dto/createUserDto';
+import { UserService } from '../../user/user.service';
 
 @Injectable()
 export class GoogleAuthStrategy extends PassportStrategy(Strategy, 'google') {
