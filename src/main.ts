@@ -1,6 +1,7 @@
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as connectRedis from 'connect-redis';
 import * as cookieParser from 'cookie-parser';
 import * as session from 'express-session';
@@ -48,6 +49,14 @@ async function bootstrap() {
 
   app.use(passport.initialize());
   app.use(passport.session());
+
+  const config = new DocumentBuilder()
+    .setTitle('API')
+    .setDescription('Your API')
+    .setVersion('1.0')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('docs', app, document);
 
   console.log(`Starting HTTP server on ${host}:${port} ...`);
 
