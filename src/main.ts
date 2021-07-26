@@ -2,6 +2,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import * as connectRedis from 'connect-redis';
+import * as cookieParser from 'cookie-parser';
 import * as session from 'express-session';
 import * as Redis from 'ioredis';
 import * as passport from 'passport';
@@ -20,6 +21,7 @@ async function bootstrap() {
       transform: true,
     }),
   );
+  app.use(cookieParser());
 
   const RedisStore = connectRedis(session);
   const redisClient = new Redis(

@@ -13,6 +13,7 @@ import { ConfigService } from '@nestjs/config';
 import { Response } from 'express';
 import { RegisterUserDto } from '../user/dto/registerUserDto';
 import { AuthService } from './auth.service';
+import { AntiForgeryGuard } from './csrf.guard';
 import { LocalAuthGuard } from './local/local.guard';
 import { RequestWithUser } from './request.interface';
 import { SessionGuard } from './session.guard';
@@ -37,7 +38,7 @@ export class AuthController {
   }
 
   @Get()
-  @UseGuards(SessionGuard)
+  @UseGuards(SessionGuard, AntiForgeryGuard)
   async me(@Req() request: RequestWithUser) {
     return request.user;
   }
