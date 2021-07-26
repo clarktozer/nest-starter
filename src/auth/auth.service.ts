@@ -1,11 +1,9 @@
 import {
   BadRequestException,
-  ForbiddenException,
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { CreateUserDto } from '../user/dto/createUserDto';
 import { RegisterUserDto } from '../user/dto/registerUserDto';
 import { UserService } from '../user/user.service';
 
@@ -51,45 +49,5 @@ export class AuthService {
     if (!isPasswordMatching) {
       throw new UnauthorizedException();
     }
-  }
-
-  public async signInWithGoogle(data: CreateUserDto) {
-    if (!data) {
-      throw new BadRequestException();
-    }
-
-    let user = await this.usersService.getByGoogleId(data.googleId);
-    if (user) {
-      return user;
-    }
-
-    user = await this.usersService.getByEmail(data.email);
-    if (user) {
-      throw new ForbiddenException(
-        'User already exists but Google account was not connected to user account',
-      );
-    }
-
-    return this.usersService.create(data);
-  }
-
-  public async signInWithFacebook(data: CreateUserDto) {
-    if (!data) {
-      throw new BadRequestException();
-    }
-
-    let user = await this.usersService.getByFacebookId(data.facebookId);
-    if (user) {
-      return user;
-    }
-
-    user = await this.usersService.getByEmail(data.email);
-    if (user) {
-      throw new ForbiddenException(
-        'User already exists but Facebook account was not connected to user account',
-      );
-    }
-
-    return this.usersService.create(data);
   }
 }
