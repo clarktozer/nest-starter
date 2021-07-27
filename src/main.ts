@@ -62,7 +62,7 @@ async function bootstrap() {
 
   await app.listen(port);
 
-  console.log('Started HTTP server.');
+  console.log(`Started HTTP server: http://${host}:${port}/${prefix}`);
 }
 
 bootstrap();

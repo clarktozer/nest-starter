@@ -1,5 +1,12 @@
 import { Exclude } from 'class-transformer';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
@@ -16,13 +23,13 @@ export class User {
   @Column({
     nullable: true,
   })
-  avatar: string;
+  avatar?: string;
 
   @Column({
     nullable: true,
   })
   @Exclude()
-  password: string;
+  password?: string;
 
   @Column({
     nullable: true,
@@ -30,7 +37,7 @@ export class User {
     name: 'google_id',
   })
   @Exclude()
-  googleId: string;
+  googleId?: string;
 
   @Column({
     nullable: true,
@@ -38,11 +45,28 @@ export class User {
     name: 'facebook_id',
   })
   @Exclude()
-  facebookId: string;
+  facebookId?: string;
 
   @Column({
     default: false,
     name: 'is_admin',
   })
   isAdmin: boolean;
+
+  @Column()
+  @CreateDateColumn({
+    name: 'created_at',
+  })
+  createdAt: Date;
+
+  @Column()
+  @UpdateDateColumn({
+    name: 'updated_at',
+  })
+  updatedAt: Date;
+
+  @DeleteDateColumn({
+    name: 'deleted_at',
+  })
+  deletedAt?: Date;
 }

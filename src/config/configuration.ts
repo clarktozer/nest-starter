@@ -2,8 +2,9 @@ export const Configuration = () => ({
   development: process.env.NODE_ENV !== 'production',
   host: process.env.APP_HOST,
   port: parseInt(process.env.APP_PORT, 10),
-  prefix: 'api',
+  prefix: process.env.APP_PREFIX,
   database: {
+    type: process.env.DATABASE_TYPE,
     host: process.env.DATABASE_HOST,
     port: parseInt(process.env.DATABASE_PORT, 10),
     user: process.env.DATABASE_USER,
@@ -15,7 +16,7 @@ export const Configuration = () => ({
     secret: process.env.SESSION_SECRET,
     redis: {
       host: process.env.REDIS_HOST,
-      port: process.env.REDIS_PORT,
+      port: parseInt(process.env.REDIS_PORT, 10),
     },
   },
   google: {
