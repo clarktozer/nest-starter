@@ -15,10 +15,10 @@
 - Local Auth
 - Google Auth
 - Facebook Auth
+- Redis for sessions
 - CSRF session tokens
 - CASL for authorization
 - TypeORM (PostgreSQL)
-- Redis for sessions
 - Swagger docs
 
 ## Installation
