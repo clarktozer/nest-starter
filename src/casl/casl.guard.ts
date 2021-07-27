@@ -1,4 +1,9 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import {
+  CanActivate,
+  ExecutionContext,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { RequestWithUser } from 'src/auth/request.interface';
 import { AUTHORIZED_KEY } from './casl.decorator';
@@ -30,7 +35,7 @@ export class AuthorizationGuard implements CanActivate {
     const { user } = context.switchToHttp().getRequest<RequestWithUser>();
 
     if (!user) {
-      return false;
+      throw new UnauthorizedException();
     }
 
     const ability = this.caslAbilityFactory.createForUser(user);
