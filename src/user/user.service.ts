@@ -49,4 +49,10 @@ export class UserService {
   async findAll() {
     return this.usersRepository.find();
   }
+
+  async findAllAdmins() {
+    return this.usersRepository.find({
+      isAdmin: true,
+    });
+  }
 }

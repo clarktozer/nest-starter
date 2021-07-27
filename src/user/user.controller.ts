@@ -13,23 +13,27 @@ import { Action, Subject } from '../casl/casl.interface';
 import { UserService } from './user.service';
 
 @Controller('user')
-@UseGuards(AuthorizationGuard)
+@UseGuards(AuthorizationGuard, SessionGuard)
 @UseInterceptors(ClassSerializerInterceptor)
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get()
-  @UseGuards(SessionGuard)
+  @Get('admins')
   @Authorized(ability => ability.can(Action.Manage, Subject.All))
+  findAllAdmins() {
+    return this.userService.findAllAdmins();
+  }
+
+  @Get()
+  @Authorized(ability => ability.can(Action.Read, Subject.Users))
   findAll() {
     return this.userService.findAll();
   }
 
   @Get(':id')
-  @UseGuards(SessionGuard)
   @Authorized([
     {
-      [Subject.All]: Action.Manage,
+      [Subject.Users]: Action.Read,
     },
   ])
   findById(@Param() id: string) {

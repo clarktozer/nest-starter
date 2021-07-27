@@ -6,13 +6,14 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as Tokens from 'csrf';
+import { Request } from 'express';
 
 @Injectable()
 export class AntiForgeryGuard implements CanActivate {
   constructor(private readonly configService: ConfigService) {}
 
   async canActivate(context: ExecutionContext) {
-    const request = context.switchToHttp().getRequest();
+    const request = context.switchToHttp().getRequest<Request>();
 
     const tokens = new Tokens();
     const token =

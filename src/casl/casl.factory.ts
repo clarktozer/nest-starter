@@ -11,7 +11,7 @@ export class CaslAbilityFactory {
     if (user.isAdmin) {
       can(Action.Manage, Subject.All);
     } else {
-      can(Action.Read, Subject.All);
+      can(Action.Read, Subject.Users);
     }
 
     return build();

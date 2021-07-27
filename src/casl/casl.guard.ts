@@ -1,5 +1,6 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
+import { RequestWithUser } from 'src/auth/request.interface';
 import { AUTHORIZED_KEY } from './casl.decorator';
 import { CaslAbilityFactory } from './casl.factory';
 import {
@@ -26,7 +27,12 @@ export class AuthorizationGuard implements CanActivate {
       return true;
     }
 
-    const { user } = context.switchToHttp().getRequest();
+    const { user } = context.switchToHttp().getRequest<RequestWithUser>();
+
+    if (!user) {
+      return false;
+    }
+
     const ability = this.caslAbilityFactory.createForUser(user);
 
     if (typeof handler === 'function') {
@@ -41,8 +47,8 @@ export class AuthorizationGuard implements CanActivate {
     permissions: AuthorizationMap[],
   ) {
     const ands = permissions.map(permission =>
-      Object.keys(permission).every((subject: keyof typeof Subject) =>
-        ability.can(permission[subject], Subject[subject]),
+      Object.keys(permission).every((subject: Subject) =>
+        ability.can(permission[subject], subject),
       ),
     );
 

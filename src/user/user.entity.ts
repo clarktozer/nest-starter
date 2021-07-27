@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
@@ -51,6 +52,7 @@ export class User {
     default: false,
     name: 'is_admin',
   })
+  @Exclude()
   isAdmin: boolean;
 
   @Column()

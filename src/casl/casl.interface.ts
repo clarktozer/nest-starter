@@ -10,6 +10,7 @@ export enum Action {
 
 export enum Subject {
   All = 'all',
+  Users = 'users',
 }
 
 export type AppAbility = Ability<[Action, Subject]>;
