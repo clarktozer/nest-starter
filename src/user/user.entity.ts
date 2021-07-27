@@ -57,9 +57,11 @@ export class User {
   @CreateDateColumn({
     name: 'created_at',
   })
+  @Exclude()
   createdAt: Date;
 
   @Column()
+  @Exclude()
   @UpdateDateColumn({
     name: 'updated_at',
   })
@@ -68,5 +70,6 @@ export class User {
   @DeleteDateColumn({
     name: 'deleted_at',
   })
+  @Exclude()
   deletedAt?: Date;
 }

@@ -41,6 +41,7 @@ async function bootstrap() {
       name: configService.get<string>('session.key'),
       cookie: {
         httpOnly: true,
+        sameSite: false,
         secure: !configService.get<boolean>('development'),
         maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year
       },
