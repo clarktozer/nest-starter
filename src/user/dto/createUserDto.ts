@@ -17,4 +17,7 @@ export class CreateUserDto {
 
   @IsString()
   facebookId?: string;
+
+  @IsString()
+  linkedinId?: string;
 }

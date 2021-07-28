@@ -20,6 +20,9 @@ export const ConfigValidationSchema = Joi.object({
   FACEBOOK_CLIENT_ID: Joi.string().required(),
   FACEBOOK_CLIENT_SECRET: Joi.string().required(),
   FACEBOOK_CALLBACK_URL: Joi.string().required(),
+  LINKEDIN_CLIENT_ID: Joi.string().required(),
+  LINKEDIN_CLIENT_SECRET: Joi.string().required(),
+  LINKEDIN_CALLBACK_URL: Joi.string().required(),
   CSRF_COOKIE_KEY: Joi.string().default('csrf'),
   CSRF_SESSION_KEY: Joi.string().default('csrfSecret'),
 });

@@ -13,6 +13,7 @@ import { AuthSerializer } from './auth.serializer';
 import { AuthService } from './auth.service';
 import { FacebookAuthModule } from './facebook/facebook.module';
 import { GoogleAuthModule } from './google/google.module';
+import { LinkedinAuthModule } from './linkedin/linkedin.module';
 import { LocalAuthStrategy } from './local/local.strategy';
 
 @Module({
@@ -22,6 +23,7 @@ import { LocalAuthStrategy } from './local/local.strategy';
     PassportModule.register({ session: true }),
     GoogleAuthModule,
     FacebookAuthModule,
+    LinkedinAuthModule,
   ],
   providers: [AuthService, LocalAuthStrategy, AuthSerializer],
   controllers: [AuthController],

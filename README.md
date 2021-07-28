@@ -15,6 +15,7 @@
 - Local Auth
 - Google Auth
 - Facebook Auth
+- LinkedIn Auth
 - Redis for sessions
 - CSRF session tokens
 - CASL for authorization

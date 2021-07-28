@@ -49,6 +49,14 @@ export class User {
   facebookId?: string;
 
   @Column({
+    nullable: true,
+    unique: true,
+    name: 'linkedin_id',
+  })
+  @Exclude()
+  linkedinId?: string;
+
+  @Column({
     default: false,
     name: 'is_admin',
   })

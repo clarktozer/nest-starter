@@ -29,6 +29,11 @@ export const Configuration = () => ({
     clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
     callbackURL: process.env.FACEBOOK_CALLBACK_URL,
   },
+  linkedin: {
+    clientId: process.env.LINKEDIN_CLIENT_ID,
+    clientSecret: process.env.LINKEDIN_CLIENT_SECRET,
+    callbackURL: process.env.LINKEDIN_CALLBACK_URL,
+  },
   csrf: {
     cookie: process.env.CSRF_COOKIE_KEY,
     session: process.env.CSRF_SESSION_KEY,
