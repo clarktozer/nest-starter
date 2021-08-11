@@ -1,6 +1,5 @@
 <div align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-  <a href="https://reactjs.org/" target="blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/220px-React-icon.svg.png" width="150" alt="React Logo" /></a>
 </div>
 
 <h3 align="center">NestJS Starter Pack</h3>
